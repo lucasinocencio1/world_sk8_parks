@@ -1,4 +1,4 @@
-.PHONY: help server install setup
+.PHONY: help server install setup mcp mcp-stdio mcp-http
 
 SHELL := /bin/bash
 
@@ -7,10 +7,13 @@ SHELL := /bin/bash
 help:
 	@echo "Skateparks API - available targets:"
 	@echo ""
-	@echo "  make setup   - Create .venv if it doesn't exist"
-	@echo "  make install - Install dependencies (runs setup first)"
-	@echo "  make server  - Run the backend (runs install first)"
-	@echo "  make help    - Show this help"
+	@echo "  make setup     - Create .venv if it doesn't exist"
+	@echo "  make install  - Install dependencies (runs setup first)"
+	@echo "  make server   - Run the backend (runs install first)"
+	@echo "  make mcp      - Run MCP server: stdio + HTTP on :8010 (Cursor + terminal)"
+	@echo "  make mcp-stdio - MCP stdio only (for Cursor)"
+	@echo "  make mcp-http  - MCP HTTP only on :8010 (for curl/other terminal)"
+	@echo "  make help     - Show this help"
 	@echo ""
 
 setup:
@@ -21,3 +24,10 @@ install: setup
 
 server: install
 	. .venv/bin/activate && uvicorn app.main:app --reload
+
+mcp: install
+	.venv/bin/python mcp_server.py
+mcp-stdio: install
+	.venv/bin/python mcp_server.py --stdio
+mcp-http: install
+	.venv/bin/python mcp_server.py --http

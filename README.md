@@ -1,4 +1,4 @@
-Worlds_skate_parks API
+Worlds_skate_parks API - MCP
 
 FastAPI backend that returns skate parks for a given city. Uses OpenStreetMap (Overpass) for data, Nominatim for geocoding, and optional reverse geocoding for addresses.
 
@@ -26,3 +26,16 @@ Creates `.venv` if missing, installs deps, starts the API at `http://127.0.0.1:8
 | `make setup`  | Create `.venv` if needed  |
 | `make install` | Install dependencies     |
 | `make server`  | Run the API (setup + install + uvicorn) |
+| `make mcp`      | Run MCP server: stdio + HTTP on :8010 (Cursor + terminal) |
+| `make mcp-stdio` | MCP stdio only (for cursor for ex.)|
+| `make mcp-http`  | MCP HTTP only on :8010 (for curl/other terminal) |
+
+## MCP server
+
+An MCP server is provided so assistants can call skate park search as a tool.
+
+- Default (`make mcp`)**: runs both stdio and HTTP on `http://127.0.0.1:8010/mcp/` (streamable-http). Use an MCP client against that URL to talk to the MCP from another terminal.
+- stdio only (`make mcp-stdio`): for Cursor; add the server in MCP config (stdio).
+- HTTP only (`make mcp-http`): only HTTP on port 8010.
+
+Tool `get_skateparks(city_name, resolve_address?)` returns skate parks for that city.
