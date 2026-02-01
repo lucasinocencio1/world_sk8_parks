@@ -6,7 +6,7 @@ Stack: Python 3.10+, FastAPI, httpx, geopy, pydantic-settings. Config via env (s
 
 Cache: In-memory TTL cache for geocoding and Overpass results (see `app/core/cache.py`). Reduces calls to Nominatim and Overpass; TTLs are configurable. Designed so you can swap to Redis later without changing callers.
 
-## Run
+How to Run:
 
 ```bash
 make server
@@ -26,4 +26,3 @@ Creates `.venv` if missing, installs deps, starts the API at `http://127.0.0.1:8
 | `make setup`  | Create `.venv` if needed  |
 | `make install` | Install dependencies     |
 | `make server`  | Run the API (setup + install + uvicorn) |
-# worlds_sk8_parks-
